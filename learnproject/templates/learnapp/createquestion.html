@@ -1,0 +1,21 @@
+{% extends 'learnapp/home.html'%}
+{% block head %}
+  <title>{% block title %} detail page{% endblock %}</title>
+  {{ block.super}}
+{% endblock %}
+{% include 'learnapp/base.html'%}
+
+{% block body %}
+<h1>Add new question </h1>
+<div style="padding-bottom:5px;">
+<form method="post" action="{% url 'lernapp:createquestion' %}">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col">
+      <input type="text" name="newquestion" class="form-control" placeholder="Enter new question ">
+    </div>
+  </div>
+</div>
+  <button type="submit" class="btn btn-success">submit question </button>
+</form>
+{% endblock %}
