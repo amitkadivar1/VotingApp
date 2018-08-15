@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'lernapp:index'%}">{% block navhome%}Home{% endblock %} <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'lernapp:questionform'%}">Add Question</a>
+      </li>
+      <li>
+      <a class='nav-link' href={% url 'lernapp:contact'%}>Contact Form </a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li>
+        <a  class="nav-link" href="{% url 'lernapp:logout' %}">Logout</a>
+      </li>
+      {% else %}
+        <li>
+          <a class="nav-link" href="{% url 'lernapp:login' %}">Login</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{% url 'lernapp:register' %}">Register</a>
+        </li>
+
+      {% endif %}
+        <li>
+            <a class="nav-link my-2 my-sm-0 navbar-text">{{user.username}}</a>
+        </li>
+
+
+    </ul>
+
+</div>
+</nav>

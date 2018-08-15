@@ -1,0 +1,59 @@
+{% extends 'learnapp/home.html'%}
+{% block head %}
+  <title>{% block title %} detail page{% endblock %}</title>
+  {{ block.super}}
+{% endblock %}
+{% include 'learnapp/base.html'%}
+
+{% block body %}
+<nav class="navbar navbar-light bg-light" style="padding-left:70%;" >
+<form class="form-inline" action="lernapp:search" method="post">
+{% csrf_token %}
+  <input class="form-control mr-sm-2" type="text"  name="search" placeholder="Search" >
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+</nav>
+      <div style="padding-top:10px;">
+
+       {% if error_message %}
+          <div class="alert alert-danger col-sm-3 offset-sm-4"style="text-align:center;" role="alert">
+            {{ error_message }}
+          </div>
+      {% endif %}
+      </div>
+
+<div class="container " style="padding:8% 0% 0% 20%">
+  <div style="padding:2% 0% 0% 35% ">
+  <button  type="button" class="btn btn-danger" style="margin:0px 0px 0px -56% "><a href="{% url 'lernapp:choiceform' question.id %}">Add choice </a></button>
+  </div>
+
+<form method="post" action="{% url 'lernapp:vote' question.id %}">
+  {% csrf_token %}
+
+    <div class="row">
+      <div class="col-sm-6 list-group">
+      <div class='list-group-item bg-warning'>
+        <strong>{{ question.question_text }}</strong>
+      </div>
+
+        {% for choice in question.choice_set.all %}
+          <div class="list-group-item bg-primary">
+
+          <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+          <label for="choice{{forloop.counter}}"> {{ choice.choice_text}}</label><br>
+        </div>
+      {% endfor %}
+      <div style="padding:2% 0% 0% 40% ">
+            <button type="submit" class="btn btn-success">Vote</button>
+            
+
+      </div>
+
+      </div>
+
+    </div>
+  </form>
+
+  </div>
+{{ search_filter}}
+{% endblock %}

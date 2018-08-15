@@ -1,0 +1,22 @@
+{% extends 'learnapp/home.html'%}
+{% block head %}
+  <title>{% block title %} Results page{% endblock %}</title>
+  {{ block.super}}
+{% endblock %}
+{% include 'learnapp/base.html'%}
+{% block body %}
+<div class="container " style="padding:10% 0% 0% 20%">
+  <div class="row">
+    <div class="col-sm-6 list-group">
+        {% for choice in question.choice_set.all %}
+
+          <div class="list-group-item offset ">
+            {{ choice.choice_text }}   |  {{ choice.votes }} vote <strong>{{choice.votes | pluralize:"your vote"}}</strong>
+          </div>
+        {% endfor %}
+      <a href="{% url 'lernapp:detail' question.id %}" class="list-group-item bg-warning"> You to give another votes ??</a>
+    </div>
+  </div>
+  </div>
+
+{% endblock %}
