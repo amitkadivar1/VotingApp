@@ -1,0 +1,40 @@
+{% extends 'learnapp/home.html'%}
+  {% block head %}
+    <title>{% block title%}Home Page{% endblock %}</title>
+    {{ block.super}}
+  {% endblock %}
+  {% include 'learnapp/base.html'%}
+  {% block body %}
+    {% if request.user.is_authenticated %}
+        <nav class="navbar navbar-light bg-light" style="padding-left:70%;" >
+        <form class="form-inline" action="{% url 'lernapp:search' %}" method="post">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name='search' placeholder="Search" >
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+        <div class="container" style="padding:35px;">
+          <div class="container " style="padding:8% 0% 0% 20%">
+            <div style="padding-left:53% ;padding-bottom:5px;">
+            </div>
+
+            <div class="row" >
+              <div class="col-sm-6 offset-sm-3">
+                {% for que in question %}
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <a href="{% url 'lernapp:userquedetail' que.id %}"
+                         style="text-decoration:none" >
+                         {{ que }}
+                       </a>
+                    </li>
+                  </ul>
+
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+        {% else %}
+          <h1>Login</h1>
+  {% endif %}
+{% endblock %}

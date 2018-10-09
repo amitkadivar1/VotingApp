@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="{% url 'lernapp:index' %}">My Vote </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,15 +9,23 @@
       <li class="nav-item ">
         <a class="nav-link" href="{% url 'lernapp:index'%}">{% block navhome%}Home{% endblock %} <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'lernapp:questionform'%}">Add Question</a>
-      </li>
       <li>
       <a class='nav-link' href={% url 'lernapp:contact'%}>Contact Form </a>
       </li>
       {% if request.user.is_authenticated %}
-      <li>
-        <a  class="nav-link" href="{% url 'lernapp:logout' %}">Logout</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item">{{user.username}}</a>
+          {% if request.user.is_staff %}
+          <a class="dropdown-item" href="{% url 'lernapp:questionform' %}">Add Question</a>
+          <a class="dropdown-item" href="{% url 'lernapp:userdetail' %}">All User Detail</a>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <a  class="dropdown-item" href="{% url 'lernapp:logout' %}">Logout</a>
+        </div>
       </li>
       {% else %}
         <li>
@@ -26,14 +34,8 @@
         <li>
           <a class="nav-link" href="{% url 'lernapp:register' %}">Register</a>
         </li>
-
-      {% endif %}
-        <li>
-            <a class="nav-link my-2 my-sm-0 navbar-text">{{user.username}}</a>
-        </li>
-
-
+        {% endif %}
     </ul>
 
-</div>
+  </div>
 </nav>

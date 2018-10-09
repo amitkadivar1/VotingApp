@@ -2,7 +2,11 @@ from django.urls import path
 from . import views
 app_name='lernapp'
 urlpatterns =[
-    path('index/',views.index,name='index'),
+    path('',views.index,name='index'),
+    path('userdetail/',views.userdetail,name='userdetail'),
+    path('<int:question_id>/userdetail/',views.userquedetail,name='userquedetail'),
+    path('<int:question_id>/deletequestion/',views.delete_question,name='deletequestion'),
+    path('<int:choice_id>/deletechoice/',views.delete_choice,name='deletechoice'),
     path('<int:question_id>/detail/',views.detail,name='detail'),
     path('<int:question_id>/vote/',views.vote,name='vote'),
     path('<int:question_id>/results/',views.results,name='results'),

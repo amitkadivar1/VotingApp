@@ -14,7 +14,7 @@
             {{ choice.choice_text }}   |  {{ choice.votes }} vote <strong>{{choice.votes | pluralize:"your vote"}}</strong>
           </div>
         {% endfor %}
-      <a href="{% url 'lernapp:detail' question.id %}" class="list-group-item bg-warning"> You to give another votes ??</a>
+      <a href="{% url 'lernapp:index'%}" class="list-group-item bg-warning"> You to give another votes ??</a>
     </div>
   </div>
   </div>

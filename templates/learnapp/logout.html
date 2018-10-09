@@ -1,0 +1,27 @@
+{% extends 'learnapp/home.html' %}
+{% block head %}
+  <title>{% block title %} detail page{% endblock %}</title>
+  {{ block.super}}
+{% endblock %}
+{% include 'learnapp/base.html'%}
+{% block body %}
+        <div class="container">
+          <div class="row pb-5">
+                  <div class="col-8 col-auto pb-5 mb-5 pl-5" style="margin-top:18%;margin-left:30%;padding-right:30%;">
+                      <form action="{% url 'lernapp:login'%}">
+                      {% if messages %}
+                      <div class="alert alert-success">
+                        {% for message in messages %}
+                        {{message}}
+                        {% endfor %}
+                      </div>
+                      {% endif %}
+                      <button class="btn btn-default offset-sm-3" style="margin-left:37%;margin-top:10px;">going to login page</button>
+                    </form>
+                {# </div> #}
+
+              </div>
+          </div>
+        </div>
+
+{% endblock %}
