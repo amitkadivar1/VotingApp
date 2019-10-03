@@ -1,64 +1,58 @@
-
-
-
-
-
-
 {% extends 'learnapp/home.html'%}
 {% block head %}
-  <title>{% block title %} detail page{% endblock %}</title>
-  {{ block.super}}
+<title>{% block title %} detail page{% endblock %}</title>
+{{ block.super}}
 {% endblock %}
 {% include 'learnapp/base.html'%}
 
 {% block body %}
-<nav class="navbar navbar-light bg-light" style="padding-left:70%;" >
-<form class="form-inline" action="lernapp:search" method="post">
-{% csrf_token %}
-  <input class="form-control mr-sm-2" type="text"  name="search" placeholder="Search" >
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
+<nav class="navbar navbar-light bg-light" style="padding-left:70%;">
+  <form class="form-inline" action="lernapp:search" method="post">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
 </nav>
-      <div style="padding-top:10px;">
+<div style="padding-top:10px;">
 
-       {% if error_message %}
-          <div class="alert alert-danger col-sm-3 offset-sm-4"style="text-align:center;" role="alert">
-            {{ error_message }}
-          </div>
-      {% endif %}
-      </div>
-<div class="container " style="padding:8% 0% 0% 20%">
-{% if request.user.is_authenticated %}
-    <div class="row">
-        <div class="col">
-          <h3>{{question.question_text}}</h3>
-          <b>{{votes}}</b>
-          <hr />
-          {% if message %}
-          <h2>{{message}}</h2>
-          {% else %}
-          <b>totaluser</b>&nbsp&nbsp:&nbsp&nbsp{{totaluser}}
-          <hr />
-          {% for us in user %}
-            <b>User</b> &nbsp&nbsp:&nbsp&nbsp{{us}}
-            <br />
-          {% endfor %}
-          {% endif %}
-          <hr />
-          {% for ch in choice %}
-            <ul>
-              <li>
-                {{ch}}---{{ch.votes}}
-
-              </ul>
-              </li>
-          {% endfor %}
-
-        </div>
-    </div>
-
-
+  {% if error_message %}
+  <div class="alert alert-danger col-sm-3 offset-sm-4" style="text-align:center;" role="alert">
+    {{ error_message }}
   </div>
+  {% endif %}
+</div>
+<div class="container" style="padding:8% 0% 0% 20%">
+  {% if request.user.is_authenticated %}
+  <div class="row">
+    <div class="col">
+      <h3>{{question.question_text}}</h3>
+      <b>{{votes}}</b>
+      <hr />
+      {% if message %}
+      <h2>{{message}}</h2>
+      {% else %}
+      <b>totaluser</b>&nbsp&nbsp:&nbsp&nbsp{{totaluser}}
+      <hr />
+      {% for us in user %}
+      <b>User</b> &nbsp&nbsp:&nbsp&nbsp{{us}}
+      <br />
+      {% endfor %}
+      {% endif %}
+      <hr />
+      {% for ch in choice %}
+      <ul>
+        <li>
+          {{ch}}---{{ch.votes}}
+
+      </ul>
+      </li>
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+</div>
 
 {% endif %}
 {% endblock %}

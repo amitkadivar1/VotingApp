@@ -1,41 +1,40 @@
 {% extends 'learnapp/home.html'%}
 {% block head %}
-  <title>{% block title %} detail page{% endblock %}</title>
-  {{ block.super}}
+<title>{% block title %} detail page{% endblock %}</title>
+{{ block.super}}
 {% endblock %}
 {% include 'learnapp/base.html'%}
 
 {% block body %}
 <div style="padding-top:10px;">
 
-       {% if error_message %}
-          <div class="alert alert-danger col-sm-3 offset-sm-4"style="text-align:center;" role="alert">
-            {{ error_message }}
-          </div>
-      {% endif %}
-      </div>
+  {% if error_message %}
+  <div class="alert alert-danger col-sm-3 offset-sm-4" style="text-align:center;" role="alert">
+    {{ error_message }}
+  </div>
+  {% endif %}
+</div>
 
-      <div class="container" style="padding:35px;">
+<div class="container" style="padding:35px;">
 
-          <div class="row" >
+  <div class="row">
 
-            <div class="col-sm-6 offset-sm-3">
-              <h3>You  search question  is " {{ search }} " and results is </h3>
-              {% for search in search_filter %}
-              <ul class="list-group">
-                  <li class="list-group-item">
-                    <a href="{% url 'lernapp:detail' search.id%}"
-                       style="text-decoration:none" >
-                      {{ search }}
+    <div class="col-sm-6 offset-sm-3">
+      <h3>You search question is " {{ search }} " and results is </h3>
+      {% for search in search_filter %}
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a href="{% url 'lernapp:detail' search.id%}" style="text-decoration:none">
+            {{ search }}
 
-                     </a>
-                  </li>
-                </ul>
+          </a>
+        </li>
+      </ul>
 
-              {% endfor %}
-            </div>
-          </div>
-      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}
